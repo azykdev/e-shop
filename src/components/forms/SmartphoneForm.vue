@@ -8,7 +8,7 @@ const store = useStore()
 
 // DATA -------------------------------------------------
 const refImgInput = ref()
-const laptopForm = ref({
+const smartphoneForm = ref({
   image: 'https://www.shutterstock.com/image-vector/photo-camera-vector-icon-600nw-1345025204.jpg',
   model: '',
   brand: '',
@@ -25,7 +25,7 @@ const changeAvatar = file => {
   if (files && files.length) {
     fileReader.readAsDataURL(files[0])
     fileReader.onload = () => {
-      if (typeof fileReader.result === 'string') laptopForm.value.image = fileReader.result
+      if (typeof fileReader.result === 'string') smartphoneForm.value.image = fileReader.result
     }
   }
 }
@@ -33,15 +33,15 @@ const changeAvatar = file => {
 // Submit form
 const submitForm = () => {
 
-  if (laptopForm.value.model && laptopForm.value.brand && laptopForm.value.descr && laptopForm.value.price) {
+  if (smartphoneForm.value.model && smartphoneForm.value.brand && smartphoneForm.value.descr && smartphoneForm.value.price) {
 
-    if (store.state.laptops.laptop) {
-      store.dispatch('laptops/putLaptop', laptopForm.value).then(() => {
-        store.dispatch('laptops/getLaptops')
+    if (store.state.smartphones.smartphone) {
+      store.dispatch('smartphones/putSmartphone', smartphoneForm.value).then(() => {
+        store.dispatch('smartphones/getSmartphones')
       })  
     } else {
-      store.dispatch('laptops/postLaptop', laptopForm.value).then(() => {
-        store.dispatch('laptops/getLaptops')
+      store.dispatch('smartphones/postSmartphone', smartphoneForm.value).then(() => {
+        store.dispatch('smartphones/getSmartphones')
       })
     }
 
@@ -52,15 +52,15 @@ const submitForm = () => {
 }
 
 // COMPUTED --------------------------------------------------
-const laptop = computed(() => {
-  return store.state.laptops.laptop
+const smartphone = computed(() => {
+  return store.state.smartphones.smartphone
 })
 
 
 // WATCH ------------------------------------------------
 watch(() => {
-  if (laptop.value) {
-    laptopForm.value = JSON.parse(JSON.stringify(laptop.value))
+  if (smartphone.value) {
+    smartphoneForm.value = JSON.parse(JSON.stringify(smartphone.value))
   }
 })
 </script>
@@ -82,7 +82,7 @@ watch(() => {
               rounded="lg"
               size="100"
               class="me-6"
-              :image="laptopForm.image"
+              :image="smartphoneForm.image"
             ></VAvatar>
             <!-- 👉 Upload avatar img -->
             <div>
@@ -121,7 +121,7 @@ watch(() => {
               variant="outlined"
               density="comfortable"
               clearable
-              v-model="laptopForm.model"
+              v-model="smartphoneForm.model"
             />
           </VCol>
 
@@ -132,7 +132,7 @@ watch(() => {
               variant="outlined"
               density="comfortable"
               clearable
-              v-model="laptopForm.brand"
+              v-model="smartphoneForm.brand"
             />
           </VCol>
 
@@ -143,7 +143,7 @@ watch(() => {
               variant="outlined"
               density="comfortable"
               clearable
-              v-model="laptopForm.descr"
+              v-model="smartphoneForm.descr"
             />
           </VCol>
 
@@ -154,7 +154,7 @@ watch(() => {
               variant="outlined"
               density="comfortable"
               clearable
-              v-model="laptopForm.star"
+              v-model="smartphoneForm.star"
               type="number"
               
             />
@@ -167,7 +167,7 @@ watch(() => {
               variant="outlined"
               density="comfortable"
               clearable
-              v-model="laptopForm.price"
+              v-model="smartphoneForm.price"
               type="number"
             />
           </VCol>
