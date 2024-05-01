@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import laptops from './modules/laptops'
 import smartphones from './modules/smartphones'
+import electronics from './modules/electronics'
 
 // Create a new store instance.
 const store = createStore({
@@ -9,7 +10,8 @@ const store = createStore({
   actions: {},
   modules: {
     laptops,
-    smartphones
+    smartphones,
+    electronics
   },
 })
 
